@@ -14,4 +14,4 @@ wheels/
 
 token.json
 credentials.json
-test.py
+logs/

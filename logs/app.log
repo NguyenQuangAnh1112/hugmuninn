@@ -1,0 +1,11 @@
+16:12:05 | CRITICAL | exception.py:48 | 🔥 Lỗi tại [create_event]: Got an unexpected keyword argument CalendarId
+Traceback (most recent call last):
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/utils/exception.py", line 38, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/tools/calendar_tools.py", line 72, in create_event
+    result = service.events().insert(CalendarId="primary", body=event).execute()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/googleapiclient/discovery.py", line 1106, in method
+    raise TypeError("Got an unexpected keyword argument {}".format(name))
+TypeError: Got an unexpected keyword argument CalendarId
