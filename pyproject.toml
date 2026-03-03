@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "discord-py>=2.7.0",
     "fastapi>=0.135.1",
     "google-api-python-client>=2.190.0",
     "google-auth-httplib2>=0.3.0",
