@@ -1,5 +1,6 @@
 import functools
-from typing import Any, Callable, Optional
+import inspect
+from typing import Callable
 
 from langchain_core.messages import AIMessage
 
@@ -24,36 +25,62 @@ class AgentReasoningError(OmniError):
 
 
 # --- 2. DECORATOR FACTORY ---
-def handle_errors(return_on_error: Optional[Any] = None, logger=default_logger):
-    """
-    Decorator Factory: Dùng để tạo ra decorator bắt lỗi.
-    - logger: Mặc định lấy từ src.utils.logger (bạn không cần truyền nữa)
-    - return_on_error: Giá trị trả về khi lỗi.
-    """
 
+
+def handle_errors(return_on_error=None, logger=default_logger):
     def decorator(func: Callable):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            try:
-                return func(*args, **kwargs)
 
-            except ToolExecutionError as e:
-                logger.error(f"🔧 Lỗi Tool [{func.__name__}]: {e}")
-                if return_on_error is not None:
-                    return return_on_error
-                raise e
+        if inspect.iscoroutinefunction(func):
 
-            except Exception as e:
-                # Ghi log kèm số dòng code (nhờ logger mới)
-                logger.critical(f"🔥 Lỗi tại [{func.__name__}]: {e}", exc_info=True)
+            @functools.wraps(func)
+            async def async_wrapper(*args, **kwargs):
+                try:
+                    return await func(*args, **kwargs)
 
-                if return_on_error is not None:
-                    return return_on_error
+                except ToolExecutionError as e:
+                    logger.error(f"🔧 Lỗi Tool [{func.__name__}]: {e}")
+                    if return_on_error is not None:
+                        return return_on_error
+                    raise
 
-                # Trả về format chuẩn cho LangGraph nếu không có chỉ định khác
-                return {"messages": [AIMessage(content=f"HỆ THỐNG GẶP LỖI: {str(e)}")]}
+                except Exception as e:
+                    logger.critical(
+                        f"🔥 Lỗi tại [{func.__name__}]: {e}",
+                        exc_info=True,
+                    )
+                    if return_on_error is not None:
+                        return return_on_error
+                    return {
+                        "messages": [AIMessage(content=f"HỆ THỐNG GẶP LỖI: {str(e)}")]
+                    }
 
-        return wrapper
+            return async_wrapper
+
+        else:
+
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                try:
+                    return func(*args, **kwargs)
+
+                except ToolExecutionError as e:
+                    logger.error(f"🔧 Lỗi Tool [{func.__name__}]: {e}")
+                    if return_on_error is not None:
+                        return return_on_error
+                    raise
+
+                except Exception as e:
+                    logger.critical(
+                        f"🔥 Lỗi tại [{func.__name__}]: {e}",
+                        exc_info=True,
+                    )
+                    if return_on_error is not None:
+                        return return_on_error
+                    return {
+                        "messages": [AIMessage(content=f"HỆ THỐNG GẶP LỖI: {str(e)}")]
+                    }
+
+            return wrapper
 
     return decorator
 

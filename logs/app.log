@@ -9,3 +9,31 @@ Traceback (most recent call last):
   File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/googleapiclient/discovery.py", line 1106, in method
     raise TypeError("Got an unexpected keyword argument {}".format(name))
 TypeError: Got an unexpected keyword argument CalendarId
+08:12:20 | INFO     | discord_tools.py:26 | Discord bot online: Hugmuninn#2817
+08:12:20 | INFO     | discord_tools.py:43 | Discord bot đã sẵn sàng nhận lệnh
+08:14:01 | INFO     | discord_tools.py:26 | Discord bot online: Hugmuninn#2817
+08:14:01 | INFO     | discord_tools.py:43 | Discord bot đã sẵn sàng nhận lệnh
+08:14:04 | CRITICAL | exception.py:73 | 🔥 Lỗi tại [_send]: 404 Not Found (error code: 10003): Unknown Channel
+Traceback (most recent call last):
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/utils/exception.py", line 64, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/tools/discord_tools.py", line 53, in _send
+    return future.result(timeout=20)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/tools/discord_tools.py", line 66, in _do
+    raw = await bot.fetch_channel(int(channel_id))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/discord/client.py", line 2709, in fetch_channel
+    data = await self.http.get_channel(channel_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/discord/http.py", line 769, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10003): Unknown Channel
+08:15:17 | INFO     | discord_tools.py:26 | Discord bot online: Hugmuninn#2817
+08:15:17 | INFO     | discord_tools.py:43 | Discord bot đã sẵn sàng nhận lệnh

@@ -1,5 +1,8 @@
+from src.tools.discord_tools import start_bot
+
+
 def main():
-    print("Hello from hugmuninn!")
+    start_bot()
 
 
 if __name__ == "__main__":
