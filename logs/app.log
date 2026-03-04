@@ -37,3 +37,37 @@ Traceback (most recent call last):
 discord.errors.NotFound: 404 Not Found (error code: 10003): Unknown Channel
 08:15:17 | INFO     | discord_tools.py:26 | Discord bot online: Hugmuninn#2817
 08:15:17 | INFO     | discord_tools.py:43 | Discord bot đã sẵn sàng nhận lệnh
+00:49:47 | CRITICAL | exception.py:73 | 🔥 Lỗi tại [browser_type]: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("#author") to be visible
+Traceback (most recent call last):
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/test/../../src/utils/exception.py", line 64, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/test/../../src/tools/browser_tools.py", line 162, in browser_type
+    return run_async(_run())
+           ^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/test/../../src/tools/browser_tools.py", line 51, in run_async
+    return loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/src/test/../../src/tools/browser_tools.py", line 154, in _run
+    await page.wait_for_selector(selector, timeout=10000)
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/playwright/async_api/_generated.py", line 8234, in wait_for_selector
+    await self._impl_obj.wait_for_selector(
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/playwright/_impl/_page.py", line 419, in wait_for_selector
+    return await self._main_frame.wait_for_selector(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/playwright/_impl/_frame.py", line 369, in wait_for_selector
+    await self._channel.send(
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/playwright/_impl/_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/muggle/hlt/py/my-project/hugmuninn/.venv/lib/python3.11/site-packages/playwright/_impl/_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("#author") to be visible
+
